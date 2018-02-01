@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const BusinessItem = ({
-  title,
+  name,
   rating
 }) => (
-  <JSX />
+  <li>
+    {this.props.name}: {this.props.rating} stars
+  </li>
 );
 
 BusinessItem.propTypes = {
-  title: PropTypes.string,
+  name: PropTypes.string,
   rating: PropTypes.number
 };
 

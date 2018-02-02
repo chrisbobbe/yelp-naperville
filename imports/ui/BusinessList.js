@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const BusinessList = ({
   results
 }) => {
-  let items = this.props.results.map(result => (
-    <BusinessItem name={result.name} rating={result.rating} />
+  let items = results.map(business => (
+    <BusinessItem business={business} />
   ));
   return (
     <ul>

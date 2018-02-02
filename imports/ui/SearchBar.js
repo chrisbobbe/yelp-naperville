@@ -32,6 +32,7 @@ class SearchBar extends Component {
             onChange={this.handleChange}
           />
         </label>
+        <input type="submit" />
       </form>
     );
   }

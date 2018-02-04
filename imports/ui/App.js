@@ -11,7 +11,6 @@ export default class App extends Component {
     return (
       <div className="container">
         <Route path="/" component={Search} />
-        // TODO: add props to BusinessDetail with render=
         <Route path="/detail" component={BusinessDetail} />
         <Nav />
       </div>

@@ -1,4 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+
+import { EJSON } from 'meteor/ejson'
 
 import SearchBar from './SearchBar';
 import BusinessList from './BusinessList';
@@ -13,18 +15,12 @@ class Search extends Component {
   /* Event handlers */
 
   fetchItems(query) {
-    const ENDPOINT = "https://api.yelp.com/v3/businesses/search";
-    const LOCATION = "Naperville, IL";
-    // TODO: deal with CORS issue and hide API_KEY (some kind of backend?)
-    const API_KEY = "Sh74Zjv_p3yhL9nCRjacdlEBPZ6okKjecxKZMQkHkwsC_F7DrflHjTfvavdCY3uoPPRQGKxjbpIbF8aKyaDHBRTs4cMnkdpXfU5lkWY7iimEhp8YE9bU5GNgRXpzWnYx";
-    let headers = new Headers({ Authorization: `Bearer ${API_KEY}` });
-    fetch(ENDPOINT).then(response => {
-      console.log(response);
-      return response.json();
-    }).then(json => {
-      this.setState({ results: json["businesses"] });
-    }).catch(error => {
-      console.log('There has been a problem with your fetch operation: ', error.message);
+    Meteor.call('searchYelp', 'Naperville, IL', query, (error, result) => {
+      if (error) {
+        console.error('Something went wrong when connecting to Yelp.');
+      } else {
+        this.setState({ results: EJSON.parse(result['content'])['businesses'] });
+      }
     });
   }
 

@@ -33,7 +33,9 @@ class Search extends Component {
         let businesses = EJSON.parse(result['content'])['businesses'];
         SearchResultArrays.update({ query: query }, { $set: { businesses: businesses } });
       }
-      this.setState({ loading: false });
+      if (this.state.loading) {
+        this.setState({ loading: false });
+      }
     });
   }
 
@@ -42,6 +44,8 @@ class Search extends Component {
     if (!Details.findOne({ id: id  })) {
       Details.insert({ id: id, detail: {} });
       this.setState({ loading: true });
+    } else {
+      this.props.history.push('/detail');
     }
     Meteor.call('getYelpDetail', id, (error, result) => {
       if (error) {
@@ -50,8 +54,10 @@ class Search extends Component {
         let detail = EJSON.parse(result['content']);
         Details.update({ id: id }, { $set: { detail: detail } });
       }
-      this.setState({ loading: false });
-      this.props.history.push('/detail')
+      if (this.state.loading) {
+        this.setState({ loading: false });
+        this.props.history.push('/detail')
+      }
     });
   }
 

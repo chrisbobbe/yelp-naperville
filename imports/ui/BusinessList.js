@@ -2,16 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withTracker } from 'meteor/react-meteor-data';
-import { SearchResultArrays } from './Search';
+import SearchResultArrays from '../api/local-collections/searchResultArrays.js';
 
 import BusinessItem from './BusinessItem';
 
 const BusinessList = ({
   query,
-  businesses
+  businesses,
+  onSelectBusiness
 }) => {
   let items = businesses.map(business => (
-    <BusinessItem business={business} key={business.id} />
+    <BusinessItem
+      business={business}
+      key={business.id}
+      onSelect={onSelectBusiness}
+    />
   ));
   return (
     <ul>
@@ -22,7 +27,8 @@ const BusinessList = ({
 
 BusinessList.propTypes = {
   businesses: PropTypes.array,
-  query: PropTypes.string
+  query: PropTypes.string,
+  onSelectBusiness: PropTypes.func
 };
 
 export default withTracker((props) => {

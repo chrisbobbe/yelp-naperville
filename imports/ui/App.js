@@ -6,14 +6,30 @@ import Search from './Search.js';
 import BusinessDetail from './BusinessDetail.js'
 
 // App component - represents the whole app
-export default class App extends Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { businessId: '' };
+    this.handleSelectBusiness = this.handleSelectBusiness.bind(this);
+  }
+
+  handleSelectBusiness(id) {
+    this.setState({ businessId: id});
+  }
+
   render() {
     return (
       <div className="container">
-        <Route path="/" component={Search} />
-        <Route path="/detail" component={BusinessDetail} />
+        <Route exact path="/" render={(props) => (
+          <Search onSelectBusiness={this.handleSelectBusiness} />
+        )} />
+        <Route exact path="/detail" render={(props) => (
+          <BusinessDetail id={this.state.businessId} />
+        )} />
         <Nav />
       </div>
     );
   }
 }
+
+export default App;

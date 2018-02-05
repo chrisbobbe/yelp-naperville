@@ -1,18 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 import YelpRating from './YelpRating';
 
-const BusinessItem = ({
-  business
-}) => (
-  <li>
-    <YelpRating stars={business.rating} />{business.name}
-  </li>
-);
+class BusinessItem extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-BusinessItem.propTypes = {
-  business: PropTypes.object,
+  handleClick(event) {
+    this.props.onSelect(this.props.business.id);
+  }
+
+  render() {
+    return (
+      <li onClick={this.handleClick}>
+        <YelpRating stars={this.props.business.rating} />{this.props.business.name}
+      </li>
+    );
+  }
 };
 
 export default BusinessItem;

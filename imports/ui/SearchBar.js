@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/fontawesome-free-solid'
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +36,9 @@ class SearchBar extends Component {
           />
         </label>
         <input type="submit" />
+        {this.props.loading &&
+          <FontAwesomeIcon spin icon={faCircleNotch} />
+        }
       </form>
     );
   }

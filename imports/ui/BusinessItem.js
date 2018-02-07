@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 import YelpRating from './YelpRating';
 
+import { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
+
 class BusinessItem extends Component {
   constructor(props) {
     super(props);
@@ -15,9 +17,14 @@ class BusinessItem extends Component {
 
   render() {
     return (
-      <li onClick={this.handleClick}>
-        <YelpRating stars={this.props.business.rating} />{this.props.business.name}
-      </li>
+      <ListItem button onClick={this.handleClick} divider>
+        <ListItemIcon>
+          <YelpRating
+            stars={this.props.business["rating"]}
+            reviews={this.props.business["review_count"]}/>
+        </ListItemIcon>
+        <ListItemText primary={this.props.business.name} />
+      </ListItem>
     );
   }
 };

@@ -7,6 +7,8 @@ import { EJSON } from 'meteor/ejson'
 import Details from '../api/local-collections/details.js';
 import SearchResultArrays from '../api/local-collections/searchResultArrays.js';
 
+import Card, { CardContent, CardHeader } from 'material-ui/Card';
+
 import SearchBar from './SearchBar';
 import BusinessList from './BusinessList';
 
@@ -45,6 +47,7 @@ class Search extends Component {
       Details.insert({ id: id, detail: {} });
       this.setState({ loading: true });
     } else {
+      // React router client-side "redirect"
       this.props.history.push('/detail');
     }
     Meteor.call('getYelpDetail', id, (error, result) => {
@@ -65,13 +68,16 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
-        <SearchBar
-          searchFunction={this.fetchBusinesses}
-          loading={this.state.loading}
-        />
-        <BusinessList query={this.state.query} onSelectBusiness={this.fetchDetail} />
-      </div>
+      <Card>
+        <CardHeader title="Search Naperville" />
+        <CardContent>
+          <SearchBar
+            searchFunction={this.fetchBusinesses}
+            loading={this.state.loading}
+          />
+          <BusinessList query={this.state.query} onSelectBusiness={this.fetchDetail} />
+        </CardContent>
+      </Card>
     );
   }
 }

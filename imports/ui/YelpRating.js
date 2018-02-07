@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Typography from 'material-ui/Typography';
+
 const YelpRating = ({
-  stars
+  stars,
+  reviews
 }) => {
   let source = 'images/';
   if (Number.isInteger(stars)) {
@@ -11,15 +14,16 @@ const YelpRating = ({
     source += `small_${stars.toString()[0]}_half@2x.png`;
   }
   return (
-    <span>
-      <img src={source} alt={'rating: ' + stars}/>
-      <span>{stars}</span>
-    </span>
+    <div>
+      <img src={source} alt={'rating: ' + stars} />
+      <Typography variant='caption'>({reviews} reviews)</Typography>
+    </div>
   );
 };
 
 YelpRating.propTypes = {
-  stars: PropTypes.number.isRequired
+  stars: PropTypes.number.isRequired,
+  reviews: PropTypes.number.isRequired
 };
 
 export default YelpRating;

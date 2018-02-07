@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import { faCircleNotch } from '@fortawesome/fontawesome-free-solid'
+import SearchIcon from 'material-ui-icons/Search';
+import IconButton from 'material-ui/IconButton';
+import { FormControl, FormHelperText } from 'material-ui/Form';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import { CircularProgress }  from 'material-ui/Progress';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -27,18 +30,20 @@ class SearchBar extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          Search:
-          <input
-            type="text"
+        <FormControl>
+          <InputLabel htmlFor="search">Search</InputLabel>
+          <Input
+            autoFocus
+            id="search"
             value={this.state.query}
             onChange={this.handleChange}
+            endAdornment={ this.props.loading ?
+              ( <CircularProgress size={30} variant="indeterminate" /> )
+              :
+              ( <SearchIcon size={30} /> )
+            }
           />
-        </label>
-        <input type="submit" />
-        {this.props.loading &&
-          <FontAwesomeIcon spin icon={faCircleNotch} />
-        }
+        </FormControl>
       </form>
     );
   }

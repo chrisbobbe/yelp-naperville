@@ -6,6 +6,8 @@ import SearchResultArrays from '../api/local-collections/searchResultArrays.js';
 
 import BusinessItem from './BusinessItem';
 
+import List from 'material-ui/List';
+
 const BusinessList = ({
   query,
   businesses,
@@ -19,9 +21,9 @@ const BusinessList = ({
     />
   ));
   return (
-    <ul>
+    <List>
       {items}
-    </ul>
+    </List>
   );
 }
 

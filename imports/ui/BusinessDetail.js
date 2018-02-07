@@ -28,7 +28,7 @@ const BusinessDetail = ({
   business,
   classes
 }) => {
-  const {
+  let {
     name,
     image_url,
     url,
@@ -42,6 +42,7 @@ const BusinessDetail = ({
     location,
     transactions
   } = business;
+
   //TODO: fix redirect so never at '/detail' unless business is defined
   return (
     <Card>
